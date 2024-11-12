@@ -3,9 +3,12 @@ import mss
 import numpy as np
 import serial
 
-bright_r = 0.50
-bright_g = 0.50
-bright_b = 0.40
+bright_r = 0.15
+delta_r = 0  # 20
+bright_g = 0.1
+delta_g = 0  # 25
+bright_b = 0.1
+delta_b = 0  # 22
 led_by_horizontal = 21
 led_by_vertical = 12
 
@@ -62,7 +65,13 @@ def get_leds_color(sct, srl, screen_width: int, screen_height: int, segment_widt
         else:
             exit()
         # result.append([round(average_color[0] * bright_b), round(average_color[1] * bright_g), round(average_color[2] * bright_r)])
-        result.append([round(average_color[0] - 30), round(average_color[1] - 30), round(average_color[2]  - 30)])
+        result.append([round(
+            average_color[0] * bright_b - delta_b if average_color[0] * bright_b - delta_b > 0 else 0
+        ), round(
+            average_color[1] *  bright_g - delta_g if average_color[1] *  bright_g - delta_g > 0 else 0
+        ), round(
+            average_color[2] * bright_r - delta_r if average_color[2] * bright_r - delta_r > 0 else 0
+        )])
     return result
 
 
