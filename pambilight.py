@@ -78,8 +78,8 @@ def get_leds_color(sct, srl, screen_width: int, screen_height: int, segment_widt
 # Подключаемся к экрану
 with mss.mss() as sct:
     # Определяем размер экрана...
-    screen_width = sct.monitors[0].get("width", 0)
-    screen_height = sct.monitors[0].get("height", 0)
+    screen_width = sct.monitors[1].get("width", 0)
+    screen_height = sct.monitors[1].get("height", 0)
     # Подсчитываем размер сегмента изображения...
     segment_width = screen_width // led_by_horizontal
     segment_height = screen_height // led_by_vertical
